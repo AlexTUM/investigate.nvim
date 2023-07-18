@@ -1,3 +1,7 @@
+(when vim.g.loaded_investigate_nvim (lua "return "))
+
+(local M {})
+
 (set-forcibly! Help-dev-docs (fn [topic content]
                                (let [url (.. "https://devdocs.io/#q=" topic
                                              "%20" content)]
@@ -39,7 +43,10 @@
                                               content)]
                                  (vim.ui.open page))
                                (print content)))))
-(keymap.set :n :<leader>k
-            (fn [] (.. ":call v:lua.MyHelp('" (___fn___.expand :<cword>) "')"))
-            {:expr true})	
-            
+(fn M.setup []
+  (keymap.set :n :<leader>k
+              (fn []
+                (.. ":call v:lua.MyHelp('" (___fn___.expand :<cword>) "')"))
+              {:expr true})
+  (set vim.g.loaded_investigate_nvim 1))
+M	
