@@ -2,9 +2,7 @@ if vim.g.loaded_investigate_nvim then
     return
 end
 
-local M = {}
-
-function M.HelpDevDocs(topic, content)
+function HelpDevDocs(topic, content)
     -- https://devdocs.io/#q=html%20title
     local url = "https://devdocs.io/#q=" .. topic .. "%20" .. content
     return url
@@ -14,7 +12,7 @@ end
 -- Documentation
 -- TODO create my own plugin for this
 -- https://github.com/Keithbsmiley/investigate.vim
-function M.MyHelp(content)
+function MyHelp(content)
     local filetype = vim.bo.filetype
 
     if filetype == 'csproj' or filetype == 'fsproj' then
@@ -30,7 +28,7 @@ function M.MyHelp(content)
         local page = 'https://cli.github.com/manual'
         vim.ui.open(page)
     elseif filetype == 'html' then
-        local page = M.HelpDevDocs('html', content)
+        local page = HelpDevDocs('html', content)
         vim.ui.open(page)
     elseif filetype == 'java' then
         local lower = string.lower(content)
@@ -41,7 +39,7 @@ function M.MyHelp(content)
         local page = 'https://developer.mozilla.org/en-US/search?q=' .. content .. '&topic=api&topic=js'
         vim.ui.open(page)
     elseif filetype == 'lua' then
-        local page = M.HelpDevDocs('lua', content)
+        local page = HelpDevDocs('lua', content)
         vim.ui.open(page)
     elseif filetype == 'rust' then
         local page = 'https://docs.rs/releases/search?query=' .. content
@@ -55,20 +53,22 @@ function M.MyHelp(content)
     end
 end
 
+
+local M = {}
+
 function M.setup()
 
-vim.keymap.set("n", "<leader>k", function()
-    local cword = vim.fn.expand("<cword>")
-    print(cword)
-    M.MyHelp(cword)
-end, { expr = true })
+    vim.keymap.set("n", "<leader>k", function()
+        local cword = vim.fn.expand("<cword>")
+        return ':lua MyHelp(\'' .. cword .. '\')<cr>'
+    end, { silent = true, expr = true })
 
--- keymap.set("v", "<leader>k", function()
---     local selected_text = -- TODO
---     return ":lua MyHelp('" .. selected_text .. "')"
--- end, { expr = true })
+    -- keymap.set("v", "<leader>k", function()
+    --     local selected_text = -- TODO
+    --     return ":lua MyHelp('" .. selected_text .. "')"
+    -- end, { expr = true })
 
     vim.g.loaded_investigate_nvim = 1
 end
-    
+
 return M
