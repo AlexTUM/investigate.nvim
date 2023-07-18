@@ -30,7 +30,7 @@ function M.MyHelp(content)
         local page = 'https://cli.github.com/manual'
         vim.ui.open(page)
     elseif filetype == 'html' then
-        local page = HelpDevDocs('html', content)
+        local page = M.HelpDevDocs('html', content)
         vim.ui.open(page)
     elseif filetype == 'java' then
         local lower = string.lower(content)
@@ -41,7 +41,7 @@ function M.MyHelp(content)
         local page = 'https://developer.mozilla.org/en-US/search?q=' .. content .. '&topic=api&topic=js'
         vim.ui.open(page)
     elseif filetype == 'lua' then
-        local page = HelpDevDocs('lua', content)
+        local page = M.HelpDevDocs('lua', content)
         vim.ui.open(page)
     elseif filetype == 'rust' then
         local page = 'https://docs.rs/releases/search?query=' .. content
@@ -59,6 +59,7 @@ function M.setup()
 
 vim.keymap.set("n", "<leader>k", function()
     local cword = vim.fn.expand("<cword>")
+    print(cword)
     M.MyHelp(cword)
 end, { expr = true })
 
