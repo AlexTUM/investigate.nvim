@@ -1,3 +1,4 @@
+
 (when vim.g.loaded_investigate_nvim (lua "return "))
 
 (local M {})
@@ -44,9 +45,10 @@
                                  (vim.ui.open page))
                                (print content)))))
 (fn M.setup []
-  (keymap.set :n :<leader>k
+  (vim.keymap.set :n :<leader>k
               (fn []
                 (.. ":call v:lua.MyHelp('" (___fn___.expand :<cword>) "')"))
               {:expr true})
+
   (set vim.g.loaded_investigate_nvim 1))
 M	
