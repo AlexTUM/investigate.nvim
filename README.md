@@ -1,3 +1,3 @@
 # Investigate.nvim
 
-A plugin for quick documentation look.
+A Neovim plugin for looking up documentation.
