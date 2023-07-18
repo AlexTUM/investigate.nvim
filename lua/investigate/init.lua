@@ -4,7 +4,7 @@ end
 
 local M = {}
 
-function HelpDevDocs(topic, content)
+function M.HelpDevDocs(topic, content)
     -- https://devdocs.io/#q=html%20title
     local url = "https://devdocs.io/#q=" .. topic .. "%20" .. content
     return url
@@ -14,7 +14,7 @@ end
 -- Documentation
 -- TODO create my own plugin for this
 -- https://github.com/Keithbsmiley/investigate.vim
-function MyHelp(content)
+function M.MyHelp(content)
     local filetype = vim.bo.filetype
 
     if filetype == 'csproj' or filetype == 'fsproj' then
@@ -58,12 +58,13 @@ end
 function M.setup()
 
 vim.keymap.set("n", "<leader>k", function()
-    return ":call v:lua.MyHelp('" .. fn.expand("<cword>") .. "')"
+    local cword = vim.fn.expand("<cword>")
+    M.MyHelp(cword)
 end, { expr = true })
 
 -- keymap.set("v", "<leader>k", function()
 --     local selected_text = -- TODO
---     return ":call v:lua.MyHelp('" .. selected_text .. "')"
+--     return ":lua MyHelp('" .. selected_text .. "')"
 -- end, { expr = true })
 
     vim.g.loaded_investigate_nvim = 1
