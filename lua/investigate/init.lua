@@ -57,7 +57,7 @@ end
 
 function M.setup()
 
-keymap.set("n", "<leader>k", function()
+vim.keymap.set("n", "<leader>k", function()
     return ":call v:lua.MyHelp('" .. fn.expand("<cword>") .. "')"
 end, { expr = true })
 
