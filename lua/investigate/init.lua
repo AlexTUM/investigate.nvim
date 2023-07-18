@@ -1,4 +1,4 @@
-if vim.g.loaded_neovcs then
+if vim.g.loaded_investigate_nvim then
     return
 end
 
@@ -55,6 +55,8 @@ function MyHelp(content)
     end
 end
 
+function M.setup()
+
 keymap.set("n", "<leader>k", function()
     return ":call v:lua.MyHelp('" .. fn.expand("<cword>") .. "')"
 end, { expr = true })
@@ -64,4 +66,7 @@ end, { expr = true })
 --     return ":call v:lua.MyHelp('" .. selected_text .. "')"
 -- end, { expr = true })
 
+    vim.g.loaded_investigate_nvim = 1
+end
+    
 return M
