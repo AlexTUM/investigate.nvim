@@ -8,6 +8,10 @@ function HelpDevDocs(topic, content)
     return url
 end
 
+
+local M = {}
+
+
 -- Help
 -- Documentation
 -- TODO create my own plugin for this
@@ -54,14 +58,12 @@ function MyHelp(content)
 end
 
 
-local M = {}
-
 function M.setup()
 
     vim.keymap.set("n", "<leader>k", function()
         local cword = vim.fn.expand("<cword>")
         return ':lua MyHelp(\'' .. cword .. '\')<cr>'
-    end, { silent = true, expr = true })
+    end, { silent = true, expr = true, desc = 'Investigate under cursor' })
 
     -- keymap.set("v", "<leader>k", function()
     --     local selected_text = -- TODO
