@@ -16,7 +16,7 @@ local M = {}
 -- Documentation
 -- TODO create my own plugin for this
 -- https://github.com/Keithbsmiley/investigate.vim
-function MyHelp(content)
+function M.MyHelp(content)
     local filetype = vim.bo.filetype
 
     if filetype == 'csproj' or filetype == 'fsproj' then
